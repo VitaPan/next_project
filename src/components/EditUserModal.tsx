@@ -12,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { ScrollArea } from "@/components/ui/scroll-area";
 import type { IUserCard } from '@/shared/types/userCard.interface';
 import { useEffect, useState } from 'react';
 import { useUserContext } from '@/shared/context/UserContext';
@@ -99,107 +100,109 @@ export function EditUserModal({ user, mode = 'edit' }: Props) {
                     {mode === 'add' ? 'Add user' : 'Edit'}
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <DialogHeader>
-                        <DialogTitle className='mb-6'>
-                            {mode === 'add' ? 'Add user' : 'Edit profile'}
-                        </DialogTitle>
-                    </DialogHeader>
-                    <div className="grid gap-4">
-                        <div className="grid gap-3">
-                            <Label>Name</Label>
-                            <Input {...register('name')} />
-                            {errors.name && (
-                                <p className="text-red-500 text-sm">{errors.name.message}</p>
-                            )}
-                        </div>
-                        <div className="grid gap-3">
-                            <Label>Username</Label>
-                            <Input {...register('username')} />
-                            {errors.username && (
-                                <p className="text-red-500 text-sm">{errors.username.message}</p>
-                            )}
-                        </div>
-                        <div className="grid gap-3">
-                            <Label>Email</Label>
-                            <Input {...register('email')} />
-                            {errors.email && (
-                                <p className="text-red-500 text-sm">{errors.email.message}</p>
-                            )}
-                        </div>
-                        <div className="grid gap-3">
-                            <Label>Company</Label>
-                            <Input {...register('company.name')} />
-                            {errors.company?.name && (
-                                <p className="text-red-500 text-sm">
-                                    {errors.company.name.message}
-                                </p>
-                            )}
-                        </div>
+            <DialogContent className="sm:max-w-[425px] max-h-[90dvh] p-0 overflow-hidden">
+                <ScrollArea className="h-[calc(90dvh-64px)] px-6 py-6">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <DialogHeader>
+                            <DialogTitle className='mb-6'>
+                                {mode === 'add' ? 'Add user' : 'Edit profile'}
+                            </DialogTitle>
+                        </DialogHeader>
+                        <div className="grid gap-4">
+                            <div className="grid gap-3">
+                                <Label>Name</Label>
+                                <Input {...register('name')} />
+                                {errors.name && (
+                                    <p className="text-red-500 text-sm">{errors.name.message}</p>
+                                )}
+                            </div>
+                            <div className="grid gap-3">
+                                <Label>Username</Label>
+                                <Input {...register('username')} />
+                                {errors.username && (
+                                    <p className="text-red-500 text-sm">{errors.username.message}</p>
+                                )}
+                            </div>
+                            <div className="grid gap-3">
+                                <Label>Email</Label>
+                                <Input {...register('email')} />
+                                {errors.email && (
+                                    <p className="text-red-500 text-sm">{errors.email.message}</p>
+                                )}
+                            </div>
+                            <div className="grid gap-3">
+                                <Label>Company</Label>
+                                <Input {...register('company.name')} />
+                                {errors.company?.name && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.company.name.message}
+                                    </p>
+                                )}
+                            </div>
 
-                        {mode === 'edit' && (
-                            <>
-                                <div className="grid gap-3">
-                                    <Label>City</Label>
-                                    <Input {...register('address.city')} />
-                                    {errors.address?.city && (
-                                        <p className="text-red-500 text-sm">
-                                            {errors.address.city.message}
-                                        </p>
-                                    )}
-                                </div>
-                                <div className="grid gap-3">
-                                    <Label>Street</Label>
-                                    <Input {...register('address.street')} />
-                                    {errors.address?.street && (
-                                        <p className="text-red-500 text-sm">
-                                            {errors.address.street.message}
-                                        </p>
-                                    )}
-                                </div>
-                                <div className="grid gap-3">
-                                    <Label>Zipcode</Label>
-                                    <Input {...register('address.zipcode')} />
-                                    {errors.address?.zipcode && (
-                                        <p className="text-red-500 text-sm">
-                                            {errors.address.zipcode.message}
-                                        </p>
-                                    )}
-                                </div>
-                            </>
-                        )}
-
-                        <div className="grid gap-3">
-                            <Label>Phone</Label>
-                            <Input {...register('phone')} />
-                        </div>
-                        <div className="grid gap-3">
-                            <Label>Website</Label>
-                            <Input {...register('website')} />
-                            {errors.website && (
-                                <p className="text-red-500 text-sm">
-                                    {errors.website.message}
-                                </p>
+                            {mode === 'edit' && (
+                                <>
+                                    <div className="grid gap-3">
+                                        <Label>City</Label>
+                                        <Input {...register('address.city')} />
+                                        {errors.address?.city && (
+                                            <p className="text-red-500 text-sm">
+                                                {errors.address.city.message}
+                                            </p>
+                                        )}
+                                    </div>
+                                    <div className="grid gap-3">
+                                        <Label>Street</Label>
+                                        <Input {...register('address.street')} />
+                                        {errors.address?.street && (
+                                            <p className="text-red-500 text-sm">
+                                                {errors.address.street.message}
+                                            </p>
+                                        )}
+                                    </div>
+                                    <div className="grid gap-3">
+                                        <Label>Zipcode</Label>
+                                        <Input {...register('address.zipcode')} />
+                                        {errors.address?.zipcode && (
+                                            <p className="text-red-500 text-sm">
+                                                {errors.address.zipcode.message}
+                                            </p>
+                                        )}
+                                    </div>
+                                </>
                             )}
+
+                            <div className="grid gap-3">
+                                <Label>Phone</Label>
+                                <Input {...register('phone')} />
+                            </div>
+                            <div className="grid gap-3">
+                                <Label>Website</Label>
+                                <Input {...register('website')} />
+                                {errors.website && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.website.message}
+                                    </p>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                    <DialogFooter className="pt-4">
-                        <DialogClose asChild>
-                            <Button
-                                type="button"
-                                variant="outline"
-                                onClick={() => reset(user)}
-                            >
-                                Cancel
+                        <DialogFooter className="sticky bottom-0 bg-background border-t px-4 py-3">
+                            <DialogClose asChild>
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    onClick={() => reset(user)}
+                                >
+                                    Cancel
+                                </Button>
+                            </DialogClose>
+                            <Button type="submit">
+                                {mode === 'add' ? 'Add user' : 'Save changes'}
                             </Button>
-                        </DialogClose>
-                        <Button type="submit">
-                            {mode === 'add' ? 'Add user' : 'Save changes'}
-                        </Button>
-                    </DialogFooter>
-                </form>
+                        </DialogFooter>
+                    </form>
+                </ScrollArea>
             </DialogContent>
-        </Dialog>
+        </Dialog >
     );
 }
