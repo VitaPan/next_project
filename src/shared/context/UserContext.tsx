@@ -41,8 +41,10 @@ export const UserProvider = ({
             if (!res.ok) throw new Error(`Ошибка загрузки: ${res.status}`);
             const data = await res.json();
             setUsers(data);
-        } catch (e) {
-            setError(e.message || "Не удалось загрузить пользователей");
+        } catch (e: unknown) {
+            const message =
+                e instanceof Error ? e.message : "Не удалось загрузить пользователей";
+            setError(message);
         } finally {
             setLoading(false);
         }
@@ -51,24 +53,30 @@ export const UserProvider = ({
     const deleteUser = (id: number) => {
         try {
             setUsers(users.filter(u => u.id !== id));
-        } catch (e) {
-            setError(e.message || "Не удалось удалить пользователя");
+        } catch (e: unknown) {
+            const message =
+                e instanceof Error ? e.message : "Не удалось удалить пользователя";
+            setError(message);
         }
     };
 
     const addUser = (user: IUserCard) => {
         try {
             setUsers([...users, user]);
-        } catch (e) {
-            setError(e.message || "Не удалось добавить пользователя");
+        } catch (e: unknown) {
+            const message =
+                e instanceof Error ? e.message : "Не удалось добавить пользователя";
+            setError(message);
         }
     };
 
     const updateUser = (updatedUser: IUserCard) => {
         try {
             setUsers(users.map(u => (u.id === updatedUser.id ? updatedUser : u)));
-        } catch (e) {
-            setError(e.message || "Не удалось обновить пользователя");
+        } catch (e: unknown) {
+            const message =
+                e instanceof Error ? e.message : "Не удалось обновить пользователя";
+            setError(message);
         }
     };
 
