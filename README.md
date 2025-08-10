@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Worker – тестовое задание (Next.js + TypeScript + Tailwind + shadcn)
 
-## Getting Started
+## 📌 О проекте
+Приложение для просмотра, фильтрации, добавления и редактирования пользователей.
+Используется API [JSONPlaceholder](https://jsonplaceholder.typicode.com/users).
+Проект реализован в рамках тестового задания.
 
-First, run the development server:
+## 🚀 Демо
+[Vercel Deploy](https://my-project.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠 Стек
+- **Next.js 15** (App Router, Server Components)
+- **TypeScript**
+- **Tailwind CSS** + **shadcn/ui**
+- **Framer Motion** (анимации)
+- **Zod** + **react-hook-form** (валидация форм)
+- **Vercel** (деплой)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Возможности
+- 📋 Список пользователей с карточками
+- 🔍 Поиск и фильтрация по компании
+- ➕ Добавление нового пользователя (локально)
+- ✏️ Редактирование данных пользователя (локально)
+- ❌ Удаление пользователя (локально)
+- 🖥 Детальная страница
+- 💾 Локальное сохранение данных (`useLocalStorage`)
+- ⏳ Скелетоны при загрузке списка и деталей
+- ⚠️ Error boundary с кастомным `ErrorCard`
+- 📱 Адаптивная верстка (mobile-first)
+- 🎬 Анимации переходов и появления элементов
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Структура проекта
+src/
+├─ app/ # маршруты Next.js (App Router)
+├─ components/ # UI и кастомные компоненты
+├─ shared/ # контекст, хуки, типы
+├─ lib/ # API-запросы, утилиты
+├─ config/ # константы, конфиги
