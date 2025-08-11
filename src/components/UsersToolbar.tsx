@@ -1,5 +1,6 @@
 'use client';
 import { Input } from '@/components/ui/input';
+import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search } from 'lucide-react';
 import { EditUserModal } from '@/components/EditUserModal';
@@ -44,6 +45,16 @@ export default function UsersToolbar({
                         {companyList.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
                     </SelectContent>
                 </Select>
+
+                <Button
+                    variant="secondary"
+                    className="shadow-sm"
+                    onClick={() => { setSearch(''); setSelectedCompany('all'); }}
+                    disabled={!search && selectedCompany === 'all'}
+                    aria-label="Reset search and filters"
+                >
+                    Reset
+                </Button>
 
                 <div className="sm:ml-auto">
                     <EditUserModal user={createEmptyUser()} mode="add" />

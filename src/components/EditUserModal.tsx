@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { toast } from "sonner"
 import type { IUserCard } from '@/shared/types/userCard.interface';
 import { useEffect, useState } from 'react';
 import { useUserContext } from '@/shared/context/UserContext';
@@ -92,11 +93,15 @@ export function EditUserModal({ user, mode = 'edit' }: Props) {
             updateUser(newUser);
         }
         setOpen(false);
+        toast.success("Success", { description: mode === 'add' ? "User added" : "User updated" });
     };
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant={mode === 'add' ? 'default' : 'outline'}>
+                <Button
+                    variant={mode === 'add' ? 'default' : 'outline'}
+                    aria-label={mode === 'add' ? 'Open add user form' : 'Open edit user form'}
+                >
                     {mode === 'add' ? 'Add user' : 'Edit'}
                 </Button>
             </DialogTrigger>
@@ -192,11 +197,15 @@ export function EditUserModal({ user, mode = 'edit' }: Props) {
                                     type="button"
                                     variant="outline"
                                     onClick={() => reset(user)}
+                                    aria-label="Cancel editing and close the form"
                                 >
                                     Cancel
                                 </Button>
                             </DialogClose>
-                            <Button type="submit">
+                            <Button
+                                type="submit"
+                                aria-label={mode === 'add' ? 'Save new user' : 'Save updated user information'}
+                            >
                                 {mode === 'add' ? 'Add user' : 'Save changes'}
                             </Button>
                         </DialogFooter>

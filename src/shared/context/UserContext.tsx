@@ -2,16 +2,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import type { IUserCard } from "../types/userCard.interface";
+import { toast } from "sonner"
 
 interface IUserContext {
     users: IUserCard[];
     setUsers: (users: IUserCard[]) => void;
-    deleteUser: (id: number) => void;
     addUser: (user: IUserCard) => void;
     updateUser: (updatedUser: IUserCard) => void;
     loading: boolean;
     error: string | null;
     reloadUsers: () => Promise<void>;
+    onRemove: (id: number) => void;
 }
 
 const UserContext = createContext<IUserContext | undefined>(undefined);
@@ -50,15 +51,6 @@ export const UserProvider = ({
         }
     };
 
-    const deleteUser = (id: number) => {
-        try {
-            setUsers(users.filter(u => u.id !== id));
-        } catch (e: unknown) {
-            const message =
-                e instanceof Error ? e.message : "Не удалось удалить пользователя";
-            setError(message);
-        }
-    };
 
     const addUser = (user: IUserCard) => {
         try {
@@ -80,9 +72,27 @@ export const UserProvider = ({
         }
     };
 
+    const onRemove = (id: number) => {
+        try {
+            const prev = [...users];
+            setUsers(users.filter(u => u.id !== id));
+            toast.success("Success", {
+                description: "User have been deleted",
+                action: {
+                    label: "Undo",
+                    onClick: () => setUsers(prev),
+                },
+            });
+        } catch (e: unknown) {
+            const message =
+                e instanceof Error ? e.message : "Не удалось удалить пользователя";
+            setError(message);
+        }
+    };
+
     return (
         <UserContext.Provider
-            value={{ users, setUsers, deleteUser, addUser, updateUser, loading, error, reloadUsers }}
+            value={{ users, setUsers, addUser, updateUser, loading, error, reloadUsers, onRemove }}
         >
             {children}
         </UserContext.Provider>

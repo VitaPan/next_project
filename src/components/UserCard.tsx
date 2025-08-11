@@ -19,7 +19,7 @@ function AvatarInitials({ name }: { name: string }) {
 
 export function UserCard(props: IUserCard) {
     const router = useRouter();
-    const { deleteUser } = useUserContext();
+    const { onRemove } = useUserContext();
 
     const goDetails = () => {
         const search = new URLSearchParams(window.location.search);
@@ -51,8 +51,19 @@ export function UserCard(props: IUserCard) {
                 </CardContent>
 
                 <CardFooter className="flex gap-2">
-                    <Button onClick={goDetails} className="flex-1">Details/ Edit</Button>
-                    <Button variant="destructive" size="icon" onClick={() => deleteUser(props.id)} aria-label="Remove user">
+                    <Button
+                        onClick={goDetails}
+                        className="flex-1"
+                        aria-label={`Edit user ${props.name}`}
+                    >
+                        Details/ Edit
+                    </Button>
+                    <Button
+                        variant="destructive"
+                        size="icon"
+                        onClick={() => onRemove(props.id)}
+                        aria-label="Remove user"
+                    >
                         <Trash2 className="h-4 w-4" />
                     </Button>
                 </CardFooter>
