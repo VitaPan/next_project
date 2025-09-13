@@ -6,7 +6,7 @@
 Проект реализован в рамках тестового задания.
 
 ## 🚀 Демо
-[Vercel Deploy](https://my-project.vercel.app)
+[Vercel Deploy]([https://my-project.vercel.app](https://next-project-rsk2.vercel.app/))
 
 ## 🛠 Стек
 - **Next.js 15** (App Router, Server Components)
